@@ -1,0 +1,21 @@
+power <- read.table('household_power_consumption.txt',
+                    sep = ';',
+                    header = TRUE,
+                    na.strings = '?')
+
+epower <- power[66637:69516,]
+
+Date.time<-as.POSIXct(paste(epower$Date, epower$Time), 
+                      format="%d/%m/%Y %H:%M:%S")
+
+plot(Date.time, epower$Global_active_power, type = 'n', ylim = c(0,40),
+     xlab = '',
+     ylab = 'Energy sub meeting')
+        lines(Date.time, epower$Sub_metering_1, type = 'h')
+        lines(Date.time, epower$Sub_metering_3, type = 'l', col = 'Blue')
+        lines(Date.time, epower$Sub_metering_2, type = 'l', col = 'Red')
+        legend("topright", lwd=1,lty= 1, seg.len=1,cex=.75, col = c("Black", "Blue", "Red"),  
+        legend = c("Sub Metering 1", "Sub Metering 2", "Sub Meetering 3"))
+
+dev.copy(png, file = "plot3.png")
+dev.off()
