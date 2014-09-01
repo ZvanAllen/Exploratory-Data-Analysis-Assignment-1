@@ -1,0 +1,19 @@
+power <- read.table('household_power_consumption.txt',
+                    sep = ';',
+                    header = TRUE,
+                    na.strings = '?')
+
+epower <- power[66637:69516,]
+
+Date.time<-as.POSIXct(paste(epower$Date, epower$Time), 
+           format="%d/%m/%Y %H:%M:%S")
+
+par(ps = 10)
+plot(Date.time, epower$Global_active_power, type = 's,S',
+        wd = 1,
+        ylab = 'Global Active Power (kilowatts)',
+        xlab = '')
+
+dev.copy(png, file = "plot2.png")
+dev.off()
+ 
