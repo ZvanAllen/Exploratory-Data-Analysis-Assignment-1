@@ -1,0 +1,13 @@
+power <- read.table('household_power_consumption.txt',
+        sep = ';',
+        header = TRUE,
+        na.strings = '?')
+
+epower <- power[66637:69516,]
+
+hist(epower$Global_active_power, col = 'darkorange2',
+        main = 'Global Active Power',
+        xlab = 'Global Active Power (kilowatts)')
+
+dev.copy(png, file = "plot1.png")
+dev.off()
